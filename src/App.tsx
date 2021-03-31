@@ -1,8 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { GlobalStyle } from './components/GlobalStyle/global-style.component';
+import { TaskList } from './components/TaskList/task-list.component';
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -15,20 +16,41 @@ const StyledApp = styled.div`
 `;
 
 const App: FC = () => {
+  const [foundationTasks, setFoundationTasks] = useState([
+    {
+      id: 0,
+      name: '',
+      done: false,
+    },
+  ]);
+  const [todoText, setTodoText] = useState('');
+
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFoundationTasks([
+      ...foundationTasks,
+      { id: foundationTasks.length + 1, name: todoText, done: false },
+    ]);
+  };
+
   return (
     <StyledApp>
       <GlobalStyle />
       <main>
-        <Form style={{ background: 'white', padding: '1rem' }}>
+        <Form
+          style={{ background: 'white', padding: '1rem' }}
+          onSubmit={submitHandler}
+        >
           <h1>My startup progress</h1>
-          <Form.Group>
-            <Form.Check type="radio" label="Check me out" inline />
-            <Form.Check type="radio" label="Check me out" inline />
-            <Form.Check type="radio" label="Check me out" inline />
-          </Form.Group>
+
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Enter new task here:</Form.Label>
-            <Form.Control type="text" placeholder="Enter new task" />
+            <Form.Control
+              type="text"
+              placeholder="Enter new task"
+              value={todoText}
+              onChange={(event) => setTodoText(event.target.value)}
+            />
             <Button variant="primary" type="submit">
               Submit
             </Button>
@@ -39,10 +61,7 @@ const App: FC = () => {
               <div className="align-self-center">1</div> <h2>Foundation</h2>
               <div className="align-self-center">DONE check</div>
             </div>
-
-            <Form.Check type="checkbox" label="Check me out" />
-            <Form.Check type="checkbox" label="Check me out" />
-            <Form.Check type="checkbox" label="Check me out" />
+            <TaskList foundationTasks={foundationTasks} />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
             <div>

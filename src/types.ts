@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface TaskProps {
   id: number | null;
   name: string | null;
@@ -5,5 +7,8 @@ export interface TaskProps {
 }
 
 export interface TaskListProps {
-  foundationTasks: TaskProps[] | null;
+  tasks: TaskProps[];
+  onChange?: () => void;
+  setTasks: Dispatch<SetStateAction<TaskProps[]>>;
+  setIsPhaseDone: Dispatch<SetStateAction<boolean>>;
 }

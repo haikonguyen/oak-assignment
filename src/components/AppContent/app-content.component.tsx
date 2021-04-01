@@ -12,13 +12,50 @@ export const AppContent: FC = () => {
   const [todoText, setTodoText] = useState('');
   const [isPhaseDone, setIsPhaseDone] = useState(false);
   const [todoPhase, setTodoPhase] = useState('');
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+
+  const submitHandler = (event: FormEvent) => {
     event.preventDefault();
-    setFoundationTasks([
-      ...foundationTasks,
-      { id: foundationTasks.length + 1, name: todoText, done: false },
-    ]);
+
+    switch (todoPhase) {
+      case 'foundation': {
+        setFoundationTasks([
+          ...foundationTasks,
+          { id: foundationTasks.length + 1, name: todoText, done: false },
+        ]);
+        setTodoText('');
+        break;
+      }
+
+      case 'discovery': {
+        setDiscoveryTasks([
+          ...discoveryTasks,
+          { id: foundationTasks.length + 1, name: todoText, done: false },
+        ]);
+        break;
+      }
+
+      case 'delivery': {
+        setDeliveryTasks([
+          ...deliveryTasks,
+          { id: foundationTasks.length + 1, name: todoText, done: false },
+        ]);
+        break;
+      }
+
+      default: {
+        return null;
+      }
+    }
   };
+
+  console.log('todoText', todoText);
+
+  const handlePhaseSwitch = (e: FormEvent) => {
+    e.persist();
+    const target = e.target as HTMLTextAreaElement;
+    setTodoPhase(target.value);
+  };
+
   return (
     <Form
       style={{ background: 'white', padding: '2rem' }}
@@ -29,13 +66,26 @@ export const AppContent: FC = () => {
       <Form.Group controlId="formBasicEmail">
         <Form.Label className="font-weight-bold">Choose Task Phase:</Form.Label>
         <Form.Check
-          name="todoPhase"
+          value="foundation"
           type="radio"
           label="Foundation"
-          value="foundation"
+          onChange={handlePhaseSwitch}
+          checked={todoPhase === 'foundation'}
         />
-        <Form.Check name="todoPhase" type="radio" label="Discovery" />
-        <Form.Check name="todoPhase" type="radio" label="Delivery" />
+        <Form.Check
+          value="discovery"
+          type="radio"
+          label="Discovery"
+          onChange={handlePhaseSwitch}
+          checked={todoPhase === 'discovery'}
+        />
+        <Form.Check
+          value="delivery"
+          type="radio"
+          label="Delivery"
+          onChange={handlePhaseSwitch}
+          checked={todoPhase === 'delivery'}
+        />
       </Form.Group>
 
       <Form.Group controlId="formBasicEmail">
@@ -48,6 +98,7 @@ export const AppContent: FC = () => {
             placeholder="Enter new task"
             onChange={(event) => setTodoText(event.target.value)}
             className="mr-3"
+            value={todoText}
           />
           <Button variant="primary" type="submit">
             New

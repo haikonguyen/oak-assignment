@@ -33,14 +33,17 @@ export const GlobalStyle = createGlobalStyle`${css`
 
   h1 {
     font-size: 25px;
+    font-weight: bold;
   }
 
   h2 {
     font-size: 22px;
+    font-weight: bold;
   }
 
   h3 {
     font-size: 20px;
+    font-weight: bold;
   }
 
   h4 {

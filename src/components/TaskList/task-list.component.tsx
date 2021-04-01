@@ -38,6 +38,7 @@ export const TaskList: FC<TaskListProps> = (props) => {
           label={task.name}
           checked={task.done}
           onChange={() => checkboxChangeHandler(task)}
+          className="mt-3 ml-3"
         />
       ))}
     </>

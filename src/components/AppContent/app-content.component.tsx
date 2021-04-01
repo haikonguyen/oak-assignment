@@ -4,11 +4,21 @@ import { FaCheck } from 'react-icons/all';
 import { Circle } from '../Circle/circle.component';
 import { TaskList } from '../TaskList/task-list.component';
 import { TaskProps } from '../../types';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export const AppContent: FC = () => {
-  const [foundationTasks, setFoundationTasks] = useState<TaskProps[]>([]);
-  const [discoveryTasks, setDiscoveryTasks] = useState<TaskProps[]>([]);
-  const [deliveryTasks, setDeliveryTasks] = useState<TaskProps[]>([]);
+  const [foundationTasks, setFoundationTasks] = useLocalStorage<TaskProps[]>(
+    'foundationTasks',
+    []
+  );
+  const [discoveryTasks, setDiscoveryTasks] = useLocalStorage<TaskProps[]>(
+    'discoveryTasks',
+    []
+  );
+  const [deliveryTasks, setDeliveryTasks] = useLocalStorage<TaskProps[]>(
+    'deliveryTasks',
+    []
+  );
   const [todoText, setTodoText] = useState('');
   const [isPhaseDone, setIsPhaseDone] = useState(false);
   const [todoPhase, setTodoPhase] = useState('');
@@ -49,8 +59,6 @@ export const AppContent: FC = () => {
       }
     }
   };
-
-  console.log('todoText', todoText);
 
   const handlePhaseSwitch = (e: FormEvent) => {
     e.persist();
@@ -116,7 +124,7 @@ export const AppContent: FC = () => {
         </div>
         <TaskList
           tasks={foundationTasks}
-          setTasks={setFoundationTasks}
+          setTasks={() => setFoundationTasks}
           setIsPhaseDone={setIsPhaseDone}
         />
       </Form.Group>
@@ -128,7 +136,7 @@ export const AppContent: FC = () => {
         </div>
         <TaskList
           tasks={discoveryTasks}
-          setTasks={setDiscoveryTasks}
+          setTasks={() => setDiscoveryTasks}
           setIsPhaseDone={setIsPhaseDone}
         />
       </Form.Group>
@@ -140,7 +148,7 @@ export const AppContent: FC = () => {
         </div>
         <TaskList
           tasks={deliveryTasks}
-          setTasks={setDeliveryTasks}
+          setTasks={() => setDeliveryTasks}
           setIsPhaseDone={setIsPhaseDone}
         />
       </Form.Group>

@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 import { TaskListProps, TaskProps } from '../../types';
 
 export const TaskList: FC<TaskListProps> = (props) => {
@@ -33,7 +34,7 @@ export const TaskList: FC<TaskListProps> = (props) => {
     <>
       {tasks?.map((task) => (
         <Form.Check
-          key={task.id}
+          key={uuidv4()}
           type="checkbox"
           label={task.name}
           checked={task.done}

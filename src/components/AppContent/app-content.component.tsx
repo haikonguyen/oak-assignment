@@ -31,6 +31,7 @@ export const AppContent: FC = () => {
           ...discoveryTasks,
           { id: foundationTasks.length + 1, name: todoText, done: false },
         ]);
+        setTodoText('');
         break;
       }
 
@@ -39,6 +40,7 @@ export const AppContent: FC = () => {
           ...deliveryTasks,
           { id: foundationTasks.length + 1, name: todoText, done: false },
         ]);
+        setTodoText('');
         break;
       }
 

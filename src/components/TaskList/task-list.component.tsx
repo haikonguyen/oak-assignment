@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TaskListProps, TaskProps } from '../../types';
 
 export const TaskList: FC<TaskListProps> = (props) => {
-  const { tasks, setTasks } = props;
+  const { tasks, setTasks, setIsPhaseDone } = props;
 
   const checkboxChangeHandler = useCallback(
     (task: TaskProps) => {
@@ -17,17 +17,15 @@ export const TaskList: FC<TaskListProps> = (props) => {
           return checkedTask;
         })
       );
-
-      // tasks.map((checkedTask) => {
-      //   if (checkedTask.done === true) {
-      //     console.log('done');
-      //   }
-      //
-      //   return checkedTask;
-      // });
     },
     [setTasks, tasks]
   );
+
+  if (tasks.every((checkedTask) => checkedTask.done)) {
+    setIsPhaseDone(true);
+  } else {
+    setIsPhaseDone(false);
+  }
 
   return (
     <>

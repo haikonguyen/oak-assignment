@@ -9,6 +9,6 @@ export interface TaskProps {
 export interface TaskListProps {
   tasks: TaskProps[];
   onChange?: () => void;
-  setTasks: Dispatch<SetStateAction<TaskProps[]>>;
+  setTasks: (value: TaskProps[]) => void;
   setIsPhaseDone: Dispatch<SetStateAction<boolean>>;
 }

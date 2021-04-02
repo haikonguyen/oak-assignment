@@ -91,12 +91,6 @@ export const AppContent: FC = () => {
     setTodoPhase(target.value);
   };
 
-  const testHandler = () => {
-    setIsFoundationPhaseDone(true);
-    setIsDeliveryPhaseDone(true);
-    setIsDiscoveryPhaseDone(true);
-  };
-
   return (
     <>
       <MessageBox
@@ -152,9 +146,6 @@ export const AppContent: FC = () => {
             <Button variant="primary" type="submit">
               New
             </Button>
-            <Button variant="primary" type="button" onClick={testHandler}>
-              test
-            </Button>
           </section>
         </Form.Group>
 
@@ -166,7 +157,7 @@ export const AppContent: FC = () => {
           </div>
           <TaskList
             tasks={foundationTasks}
-            setTasks={() => setFoundationTasks}
+            setTasks={setFoundationTasks}
             setIsPhaseDone={setIsFoundationPhaseDone}
           />
         </Form.Group>
@@ -178,7 +169,7 @@ export const AppContent: FC = () => {
           </div>
           <TaskList
             tasks={discoveryTasks}
-            setTasks={() => setDiscoveryTasks}
+            setTasks={setDiscoveryTasks}
             setIsPhaseDone={setIsDiscoveryPhaseDone}
           />
         </Form.Group>
@@ -190,7 +181,7 @@ export const AppContent: FC = () => {
           </div>
           <TaskList
             tasks={deliveryTasks}
-            setTasks={() => setDeliveryTasks}
+            setTasks={setDeliveryTasks}
             setIsPhaseDone={setIsDeliveryPhaseDone}
           />
         </Form.Group>

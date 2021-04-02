@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { Form } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { IoTrashBinOutline } from 'react-icons/all';
 import { TaskListProps, TaskProps } from '../../types';
 
 export const TaskList: FC<TaskListProps> = (props) => {
@@ -21,6 +22,13 @@ export const TaskList: FC<TaskListProps> = (props) => {
     [setTasks, tasks]
   );
 
+  const deleteHandler = useCallback(
+    (task: TaskProps) => {
+      setTasks(tasks.filter((deletedTask) => deletedTask.id !== task.id));
+    },
+    [setTasks, tasks]
+  );
+
   if (tasks.every((checkedTask) => checkedTask.done)) {
     setIsPhaseDone(true);
   } else {
@@ -30,14 +38,22 @@ export const TaskList: FC<TaskListProps> = (props) => {
   return (
     <>
       {tasks?.map((task) => (
-        <Form.Check
+        <section
           key={uuidv4()}
-          type="checkbox"
-          label={task.name}
-          checked={task.done}
-          onChange={() => checkboxChangeHandler(task)}
-          className="mt-3 ml-3"
-        />
+          className="d-flex align-items-center justify-content-between"
+        >
+          <Form.Check
+            type="checkbox"
+            label={task.name}
+            checked={task.done}
+            onChange={() => checkboxChangeHandler(task)}
+            className="mt-3"
+          />
+          <IoTrashBinOutline
+            style={{ cursor: 'pointer' }}
+            onClick={() => deleteHandler(task)}
+          />
+        </section>
       ))}
     </>
   );

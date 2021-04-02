@@ -38,6 +38,7 @@ export const AppContent: FC = () => {
   const [showMsgBox, setShowMsgBox] = useState(false);
   const [todoPhase, setTodoPhase] = useState('');
   const [completeMsg, setCompleteMsg] = useState('');
+  const [validationText, setValidationText] = useState(false);
 
   useEffect(() => {
     if (isFoundationPhaseDone && isDiscoveryPhaseDone && isDeliveryPhaseDone) {
@@ -80,13 +81,14 @@ export const AppContent: FC = () => {
       }
 
       default: {
-        return null;
+        setValidationText(true);
       }
     }
   };
 
   const handlePhaseSwitch = (e: FormEvent) => {
     e.persist();
+    setValidationText(false);
     const target = e.target as HTMLTextAreaElement;
     setTodoPhase(target.value);
   };
@@ -108,6 +110,9 @@ export const AppContent: FC = () => {
           <Form.Label className="font-weight-bold">
             Choose Task Phase:
           </Form.Label>
+          <div className="alert-danger">
+            {validationText && 'Please choose Task Phase'}
+          </div>
           <Form.Check
             value="foundation"
             type="radio"

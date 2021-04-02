@@ -18,14 +18,13 @@ export const TaskList: FC<TaskListProps> = (props) => {
         })
       );
 
-      // @ts-ignore
-      tasks.map((checkedTask) => {
-        if (checkedTask.done === true) {
-          console.log('done');
-        }
-
-        return checkedTask;
-      });
+      // tasks.map((checkedTask) => {
+      //   if (checkedTask.done === true) {
+      //     console.log('done');
+      //   }
+      //
+      //   return checkedTask;
+      // });
     },
     [setTasks, tasks]
   );

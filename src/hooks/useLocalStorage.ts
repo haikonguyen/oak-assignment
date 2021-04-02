@@ -16,6 +16,7 @@ function useLocalStorage<T>(
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
     }
@@ -30,6 +31,7 @@ function useLocalStorage<T>(
   const setValue = (value: T) => {
     // Prevent build error "window is undefined" but keeps working
     if (typeof window === 'undefined') {
+      // eslint-disable-next-line no-console
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`
       );
@@ -48,6 +50,7 @@ function useLocalStorage<T>(
       // We dispatch a custom event so every useLocalStorage hook are notified
       window.dispatchEvent(new Event('local-storage'));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn(`Error setting localStorage key “${key}”:`, error);
     }
   };

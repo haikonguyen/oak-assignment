@@ -1,5 +1,5 @@
 import React, { FC, FormEvent, useEffect, useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { FaCheck } from 'react-icons/all';
 import { Circle } from '../Circle/circle.component';
 import { TaskList } from '../TaskList/task-list.component';
@@ -47,8 +47,6 @@ export const AppContent: FC = () => {
         .then(() => setShowMsgBox(true));
     }
   }, [isDeliveryPhaseDone, isDiscoveryPhaseDone, isFoundationPhaseDone]);
-
-  console.log('completeMsg', completeMsg);
 
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();

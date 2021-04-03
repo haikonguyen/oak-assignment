@@ -56,7 +56,11 @@ export const AppContent: FC = () => {
       case 'foundation': {
         setFoundationTasks([
           ...foundationTasks,
-          { id: foundationTasks.length + 1, name: todoText, done: false },
+          {
+            id: foundationTasks.length + 1,
+            name: todoText,
+            done: false,
+          },
         ]);
         setTodoText('');
         break;
@@ -65,7 +69,11 @@ export const AppContent: FC = () => {
       case 'discovery': {
         setDiscoveryTasks([
           ...discoveryTasks,
-          { id: foundationTasks.length + 1, name: todoText, done: false },
+          {
+            id: foundationTasks.length + 1,
+            name: todoText,
+            done: false,
+          },
         ]);
         setTodoText('');
         break;
@@ -74,7 +82,11 @@ export const AppContent: FC = () => {
       case 'delivery': {
         setDeliveryTasks([
           ...deliveryTasks,
-          { id: foundationTasks.length + 1, name: todoText, done: false },
+          {
+            id: foundationTasks.length + 1,
+            name: todoText,
+            done: false,
+          },
         ]);
         setTodoText('');
         break;

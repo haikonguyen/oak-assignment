@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { GlobalStyle } from './components/GlobalStyle/global-style.component';
 import { AppContent } from './components/AppContent/app-content.component';
+import { GlobalStyle } from './components/GlobalStyle/global-style.component';
 
 const StyledApp = styled.div`
   height: 100vh;

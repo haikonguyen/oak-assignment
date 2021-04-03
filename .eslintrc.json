@@ -5,6 +5,10 @@
     "useJSXTextNode": true,
     "extraFileExtensions": [".ts", ".tsx", ".js", ".jsx"]
   },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
   "extends": [
     "wesbos",
     "plugin:@typescript-eslint/recommended",
